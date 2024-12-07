@@ -1,3 +1,4 @@
+"use"
 import React, { useEffect, useRef } from 'react';
 
 const TranslateComponent = () => {
