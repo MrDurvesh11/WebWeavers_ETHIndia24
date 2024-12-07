@@ -9,6 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lit-protocol/auth-helpers": "^7.0.1",
+    "@lit-protocol/constants": "^7.0.1",
+    "@lit-protocol/contracts-sdk": "^7.0.1",
+    "@lit-protocol/encryption": "^7.0.1",
+    "@lit-protocol/lit-node-client": "^7.0.1",
+    "chai": "^5.1.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.0.13",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -19,7 +27,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cobe": "^0.6.3",
-    "ethers": "^6.13.4",
+    "ethers": "^5.7.2",
     "framer-motion": "^11.13.1",
     "heroicons": "^2.2.0",
     "lucide-react": "^0.468.0",
