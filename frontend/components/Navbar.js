@@ -45,7 +45,7 @@ function Navbar() {
           className="h-12 w-12 lg:h-20 lg:w-20" // Adjust size on larger screens
         />
         <span className="font-bold text-lg lg:text-xl text-black dark:text-white">
-          Study Bridge
+          EquiChain
         </span>{" "}
         {/* Adjusted font size for mobile */}
       </div>

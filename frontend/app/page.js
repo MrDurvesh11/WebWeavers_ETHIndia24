@@ -28,11 +28,11 @@ export default function Home() {
       {/* <Benefits data={benefitOne} />
        */}
       <FeaturesSectionDemo />
-      <SectionTitle title=" How to use Study Bridge" />
+      <SectionTitle title=" How to use EquiChain" />
       <Video />
 
       <SectionTitle
-        pretitle="Why should you use Study Bridge"
+        pretitle="Why should you use EquiChain"
         title="Our Features"
       ></SectionTitle>
       <TabsSection />
