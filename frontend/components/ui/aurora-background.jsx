@@ -1,7 +1,5 @@
 "use client";;
-// import { cn } from "@/lib/utils";
-import {cn } from "@/app/utils/utils";
-
+import { cn } from "@/lib/utils";
 import React from "react";
 
 export const AuroraBackground = ({
