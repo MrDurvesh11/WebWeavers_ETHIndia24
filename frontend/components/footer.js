@@ -29,7 +29,7 @@ export default function Footer() {
             href=""
             target="_blank"
             rel="noopener">
-            Study Bridgde
+            EquiChain
           </a>{" "}
          
         </div>

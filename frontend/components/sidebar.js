@@ -7,7 +7,7 @@ export default function Sidebar() {
     <aside className="w-64 bg-white dark:bg-gray-800 shadow-md">
       <div className="p-6">
         <h1 className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-          IPO Allocator
+        EquiChain
         </h1>
       </div>
       <nav className="mt-6">
