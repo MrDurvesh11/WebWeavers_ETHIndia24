@@ -26,9 +26,10 @@ const ethersWallet = new ethers.Wallet('4560901e92310976371c75c3e9bcfb6512b80915
 
 export async function POST(request) {
    const data = await request.json();
+   console.log('Data:', data);
    let litNodeClient;
    litNodeClient = await getLitNodeClient();
-   const { ciphertext, dataToEncryptHash, accessControlConditions } = await runExample(data);
+   const { ciphertext, dataToEncryptHash, accessControlConditions } = await runExample(data.Data);
    console.log(`ℹ️  ciphertext: ${ciphertext}`);
    console.log(`ℹ️  dataToEncryptHash: ${dataToEncryptHash}`);
    console.log(`ℹ️  accessControlConditions: ${accessControlConditions}`);
