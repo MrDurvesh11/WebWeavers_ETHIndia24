@@ -2,6 +2,7 @@
 import { LIT_ABILITY } from "@lit-protocol/constants";
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
 import { getEnv, getEthersSigner, getLitNodeClient } from "./utils.js";
+import {encryptString, decryptToFile} from "@lit-protocol/encryption";
 
 import {
   createSiweMessage,
@@ -77,7 +78,7 @@ const ethersWallet = new ethers.Wallet('4560901e92310976371c75c3e9bcfb6512b80915
             });
           },
         });
-        const decryptedString = await litNodeClient.decrypt(
+        const decryptedString = await decryptToString(
             {
               accessControlConditions,
               chain: "ethereum",
@@ -99,9 +100,13 @@ const ethersWallet = new ethers.Wallet('4560901e92310976371c75c3e9bcfb6512b80915
         //   },
         //   litNodeClient
         // );
-        const textDecoder = new TextDecoder();
-        const decryptedString2 = textDecoder.decode(new Uint8Array(decryptedString.decryptedData));
-        console.log(`ℹ️  decryptedString: ${decryptedString2}`);
+        // const textDecoder = new TextDecoder();
+        console.log(`ℹ️  decryptedString: ${decryptedString}`);
+        // decrypt the data
+
+        
+        // const decryptedString2 = textDecoder.decode(new Uint8Array(decryptedString.decryptedData));
+        // console.log(`ℹ️  decryptedString: ${decryptedString2.toString()}`);
         // console.log(`ℹ️  decryptedString: ${decryptedString.decryptedData}`);
         return decryptedString;
       }
