@@ -1,93 +1,211 @@
-"yuse client"
-import React, { useState, useEffect } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 
-export default function IPOPage() {
-  const [walletAddress, setWalletAddress] = useState("");
-  const [ipoDetails, setIpoDetails] = useState({
-    ipoName: "Tata",
-    walletAddress: "0xes54sdfs6656445sd",
-    issuePrice: 120,
-    totalShares: 144000,
-    lotSize: 12,
-    companySector: "Power",
-    biddingStartTime: new Date(1733551264700).toLocaleString(),
-    biddingEndTime: new Date(1733551400900).toLocaleString(),
+export default function Home() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [formData, setFormData] = useState({
+    ipoName: "",
+    walletAddress: "",
+    issuePrice: "",
+    totalShares: "",
+    lotSize: "",
+    companySector: "",
+    biddingStartTime: "",
+    biddingEndTime: "",
   });
 
-  const connectWallet = async () => {
-    if (!window.ethereum) {
-      alert("Please install a Web3 wallet extension like MetaMask.");
-      return;
-    }
-
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
-      setWalletAddress(address);
-    } catch (error) {
-      console.error("Error connecting to wallet:", error);
-    }
-  };
-
   useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", (accounts) => {
-        setWalletAddress(accounts[0] || "");
-      });
+    if (typeof window !== "undefined") {
+      const currentTime = new Date();
+      const oneHourLater = new Date(currentTime.getTime() + 3600 * 1000);
+      setFormData((prev) => ({
+        ...prev,
+        biddingStartTime: currentTime.toISOString().slice(0, 16),
+        biddingEndTime: oneHourLater.toISOString().slice(0, 16),
+      }));
     }
   }, []);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Data:", formData);
+    alert("IPO Details Submitted Successfully!");
+  };
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const accounts = await provider.send("eth_requestAccounts", []);
+        const walletAddress = accounts[0];
+        setFormData((prev) => ({ ...prev, walletAddress }));
+        setWalletConnected(true);
+        alert("Wallet connected successfully!");
+      } catch (error) {
+        console.error("Failed to connect wallet:", error);
+        alert("Failed to connect wallet. Please try again.");
+      }
+    } else {
+      alert("MetaMask is not installed. Please install it to connect.");
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-blue-700 text-white p-6">
-      <div className="max-w-3xl mx-auto bg-white text-gray-800 rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl font-bold text-center text-purple-600 mb-4">
-          IPO Allocation - {ipoDetails.ipoName}
-        </h1>
-        <div className="space-y-4">
-          <div>
-            <label className="block font-semibold">Wallet Address</label>
-            <input
-              type="text"
-              value={walletAddress || ipoDetails.walletAddress}
-              readOnly
-              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
+    <div className={`${isDarkMode ? "dark" : ""}`}>
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md w-full max-w-4xl p-8">
+          {/* Header Section */}
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+              IPO Allocation Form
+            </h1>
           </div>
-          <button
-            onClick={connectWallet}
-            className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-300"
-          >
-            {walletAddress ? "Wallet Connected" : "Connect Wallet"}
-          </button>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block font-semibold">Issue Price</label>
-              <p>{ipoDetails.issuePrice} ₹</p>
-            </div>
-            <div>
-              <label className="block font-semibold">Total Shares</label>
-              <p>{ipoDetails.totalShares}</p>
-            </div>
-            <div>
-              <label className="block font-semibold">Lot Size</label>
-              <p>{ipoDetails.lotSize}</p>
-            </div>
-            <div>
-              <label className="block font-semibold">Company Sector</label>
-              <p>{ipoDetails.companySector}</p>
-            </div>
-            <div>
-              <label className="block font-semibold">Bidding Start Time</label>
-              <p>{ipoDetails.biddingStartTime}</p>
-            </div>
-            <div>
-              <label className="block font-semibold">Bidding End Time</label>
-              <p>{ipoDetails.biddingEndTime}</p>
-            </div>
+
+          {/* Wallet Connection */}
+          <div className="flex justify-end mb-6">
+            <button
+              onClick={connectWallet}
+              className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 dark:hover:bg-blue-800"
+            >
+              {walletConnected ? "Wallet Connected" : "Connect Wallet"}
+            </button>
           </div>
+
+          {/* Form Section */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Row 1: IPO Name */}
+            <div>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
+                IPO Name
+              </label>
+              <input
+                type="text"
+                name="ipoName"
+                value={formData.ipoName}
+                onChange={handleChange}
+                placeholder="Enter IPO Name"
+                className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+              />
+            </div>
+
+            {/* Row 2: Wallet Address */}
+            <div>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
+                Wallet Address
+              </label>
+              <input
+                type="text"
+                name="walletAddress"
+                value={formData.walletAddress}
+                readOnly
+                placeholder="Connect Wallet to Autofill"
+                className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+              />
+            </div>
+
+            {/* Row 3: Issue Price and Total Shares */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Issue Price
+                </label>
+                <input
+                  type="number"
+                  name="issuePrice"
+                  value={formData.issuePrice}
+                  onChange={handleChange}
+                  placeholder="Enter Issue Price"
+                  className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Total Shares
+                </label>
+                <input
+                  type="number"
+                  name="totalShares"
+                  value={formData.totalShares}
+                  onChange={handleChange}
+                  placeholder="Enter Total Shares"
+                  className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                />
+              </div>
+            </div>
+
+            {/* Row 4: Lot Size and Company Sector */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Lot Size
+                </label>
+                <input
+                  type="number"
+                  name="lotSize"
+                  value={formData.lotSize}
+                  onChange={handleChange}
+                  placeholder="Enter Lot Size"
+                  className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Company Sector
+                </label>
+                <input
+                  type="text"
+                  name="companySector"
+                  value={formData.companySector}
+                  onChange={handleChange}
+                  placeholder="Enter Company Sector"
+                  className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                />
+              </div>
+            </div>
+
+            {/* Row 5: Bidding Start and End Times */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Bidding Start Time
+                </label>
+                <input
+                  type="datetime-local"
+                  name="biddingStartTime"
+                  value={formData.biddingStartTime}
+                  onChange={handleChange}
+                  className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
+                  Bidding End Time
+                </label>
+                <input
+                  type="datetime-local"
+                  name="biddingEndTime"
+                  value={formData.biddingEndTime}
+                  onChange={handleChange}
+                  className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                />
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white text-sm font-medium py-3 rounded-lg shadow-md hover:bg-blue-700 dark:hover:bg-blue-800"
+            >
+              Submit IPO Details
+            </button>
+          </form>
         </div>
       </div>
     </div>
