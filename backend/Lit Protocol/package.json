@@ -13,8 +13,11 @@
     "@lit-protocol/auth-helpers": "^7.0.1",
     "@lit-protocol/constants": "^7.0.1",
     "@lit-protocol/contracts-sdk": "^7.0.1",
+    "@lit-protocol/encryption": "^7.0.1",
     "@lit-protocol/lit-node-client": "^7.0.1",
     "chai": "^5.1.2",
-    "ethers": "^5.7.2"
+    "ethers": "^5.7.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   }
 }
