@@ -23,10 +23,14 @@ export default function IPOForm() {
   };
 
   const connectWallet = async () => {
-    if (typeof window !== "undefined" && window.ethereum) {
+    if (typeof window !== "undefined" && window.okto) {
       try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        // Use ethers to create a provider connected to Okto
+        const provider = new ethers.providers.Web3Provider(window.okto);
+        
+        // Request wallet connection
         const accounts = await provider.send("eth_requestAccounts", []);
+        
         setFormData((prev) => ({ ...prev, walletAddress: accounts[0] }));
         setWalletConnected(true);
       } catch (error) {
@@ -34,7 +38,7 @@ export default function IPOForm() {
         alert("Failed to connect wallet. Please try again.");
       }
     } else {
-      alert("MetaMask is not available. Please install it to connect.");
+      alert("Okto Wallet is not available. Please install it to connect.");
     }
   };
 

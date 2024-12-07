@@ -18,11 +18,11 @@ export default function AuroraBackgroundDemo() {
         className="relative flex flex-col gap-4 items-center justify-center px-4 z-20"
       >
         <div className="text-2xl mt-64 sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white text-center">
-          Focus on quality learning,<br /> not just quantity
+          Revolutionizing IPO Allocation,<br /> One Block at a Time
         </div>
 
         <div className="font-light text-sm sm:text-base md:text-2xl lg:text-4xl text-gray-300 py-4 text-center">
-          Get personalized guidance from experienced Trainers to excel in your academic journey
+          Experience transparent, fair, and decentralized IPO allocation with EquiChain's Web3-powered platform.
         </div>
         <button className="bg-blue-600 dark:bg-gray-800 rounded-full w-fit text-white px-6 py-3 mx-auto mt-6 transition hover:bg-blue-700 dark:hover:bg-gray-600">
           Get Started
