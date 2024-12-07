@@ -6,28 +6,28 @@ import createGlobe from "cobe";
 export function FeaturesSectionDemo() {
   const features = [
     {
-      title: "Connect with Experienced Trainers",
+      title: "Decentralized IPO Registration",
       description:
-        "Our platform connects students preparing for NEET, JEE, and CET with college students who have successfully completed their training.",
-      imageSrc: "/connect.png",
+        "Companies can register their IPOs on our decentralized platform, ensuring transparency and security.",
+      imageSrc: "/ipo-registration.png",
     },
     {
-      title: "Focused Topic Assistance",
+      title: "Fair Allocation Using Randomness",
       description:
-        "Students can request help on specific topics, ensuring they receive targeted support and guidance.",
-      imageSrc: "/assist.png",
+        "We use blockchain-based verifiable randomness to ensure a fair allocation process for IPO participants.",
+      imageSrc: "/randomness.png",
     },
     {
-      title: "Secure Online Meetings",
+      title: "Secure Crypto Payments",
       description:
-        "The application facilitates online meetings between trainees and trainers, ensuring a safe and focused learning environment.",
-      imageSrc: "/secure.png",
+        "Participants can apply for IPOs and make payments securely using cryptocurrencies like ETH and stablecoins.",
+      imageSrc: "/crypto-payments.png",
     },
     {
-      title: "Conversation Analysis",
+      title: "Transparent User Dashboard",
       description:
-        "All sessions are recorded and analyzed for maintaining quality and respectful conversations, ensuring a positive learning experience.",
-      imageSrc: "/conversation.png",
+        "Track your IPO applications, allocation results, and transaction history in a user-friendly dashboard.",
+      imageSrc: "/dashboard.png",
     },
   ];
 
@@ -36,10 +36,10 @@ export function FeaturesSectionDemo() {
       {/* Header Section */}
       <div className="text-center mb-12">
         <h4 className="text-3xl lg:text-5xl font-bold text-black dark:text-white">
-          Empowering Education Through Technology
+          Revolutionizing IPOs Through Decentralization
         </h4>
         <p className="mt-4 text-base lg:text-lg text-neutral-500 dark:text-neutral-300">
-          Our platform bridges the gap in education, connecting aspiring students with the guidance they need to succeed.
+          Our platform ensures a secure, transparent, and fair IPO allocation process using blockchain technology.
         </p>
       </div>
 
@@ -94,6 +94,8 @@ export const Globe = () => {
       markers: [
         { location: [37.7595, -122.4367], size: 0.03 },
         { location: [40.7128, -74.006], size: 0.1 },
+        { location: [51.5074, -0.1278], size: 0.05 },
+        { location: [28.6139, 77.209], size: 0.05 },
       ],
       onRender: (state) => {
         state.phi = phi;

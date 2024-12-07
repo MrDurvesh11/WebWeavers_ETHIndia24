@@ -40,30 +40,41 @@ const Faq = () => {
 
 export const faqdata = [
   {
-    question: "What is this application about?",
+    question: "What is this platform about?",
     answer:
-      "This application connects school students preparing for NEET/JEE/CET with recent college graduates who can provide topic-specific training.",
+      "This platform enables a decentralized and transparent IPO allocation process, allowing companies to register and users to apply for IPOs using cryptocurrency.",
   },
   {
-    question: "How can I request help from a trainer?",
+    question: "How do companies register for an IPO?",
     answer:
-      "Simply select a specific topic you need assistance with, and the app will connect you with an appropriate trainer.",
+      "Companies can register by creating an account, verifying their identity, and submitting details about their IPO, such as the number of shares, price per share, and timeline.",
   },
   {
-    question: "What features does this app offer?",
+    question: "How can users participate in an IPO?",
     answer:
-      "The app offers one-on-one online meetings, audio recording for analysis, and a user-friendly interface to facilitate effective learning.",
+      "Users need to register on the platform, connect their cryptocurrency wallet, and apply for IPOs by committing a specified amount of cryptocurrency.",
   },
   {
-    question: "Is the training session recorded?",
+    question: "How is the allocation process randomized?",
     answer:
-      "Yes, all training sessions are recorded for analysis to ensure quality and maintain a respectful conversation.",
+      "We use Chainlink's Verifiable Random Function (VRF) to ensure a secure and fair randomization process for IPO allocation.",
   },
   {
-    question: "Are there any costs involved?",
+    question: "What happens if I don’t get allocated shares?",
     answer:
-      "The first month of training is free, and subsequent pricing options will be transparent without any hidden fees.",
+      "If you’re not allocated shares, your committed funds will be automatically refunded to your connected cryptocurrency wallet.",
   },
+  {
+    question: "What cryptocurrencies are supported?",
+    answer:
+      "Currently, the platform supports popular cryptocurrencies like ETH and stablecoins such as USDC and USDT for transactions.",
+  },
+  {
+    question: "Are there any fees involved?",
+    answer:
+      "There is a minimal transaction fee to cover network costs. Additionally, a platform fee may apply, which will be transparently displayed during the IPO application process.",
+  }
 ];
+
 
 export default Faq;
