@@ -33,9 +33,9 @@ The traditional IPO allocation systems are:
 - ❌ Discouraging for Retail Investors  
 
 ### **EquiChain's Solutions:**  
-✅ Uses *randomized allocation* for fairness.  
-✅ Offers *transparent processes* through decentralized protocols.  
-✅ Simplifies participation for retail investors.  
+- ✅ Uses *randomized allocation* for fairness.  
+- ✅ Offers *transparent processes* through decentralized protocols.  
+- ✅ Simplifies participation for retail investors.  
 
 ---
 
