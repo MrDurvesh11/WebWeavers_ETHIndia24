@@ -2,7 +2,7 @@
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
 import { getEthersSigner, getLitNodeClient } from "./utils.js";
 import fs from 'fs';
-
+import { encryptString } from "@lit-protocol/encryption";
 function readIPODetailsJson() {
     const filePath = './IPODetails.json'; // Adjust the path if necessary
     try {
@@ -45,10 +45,10 @@ const ETHEREUM_PRIVATE_KEY = "4560901e92310976371c75c3e9bcfb6512b8091594cc51021b
         ];
 
         // Encrypt the JSON string using Lit protocol
-        const { ciphertext, dataToEncryptHash } = await litNodeClient.encrypt({
-            dataToEncrypt: new TextEncoder().encode(JSON.stringify(JSONDATA)),
+        const { ciphertext, dataToEncryptHash } = await encryptString({
+            dataToEncrypt: JSON.stringify(JSONDATA),
             accessControlConditions,
-        });
+        },litNodeClient);
 
         console.log(`ℹ️  ciphertext: ${ciphertext}`);
         console.log(`ℹ️  dataToEncryptHash: ${dataToEncryptHash}`);

@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 // import FormData from 'form-data';
-
+import { encryptString } from '@lit-protocol/encryption';
 import { LIT_ABILITY } from "@lit-protocol/constants";
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
 import { getEnv, getLitNodeClient } from "./utils.js";
@@ -29,7 +29,7 @@ export async function POST(request) {
    console.log('Data:', data);
    let litNodeClient;
    litNodeClient = await getLitNodeClient();
-   const { ciphertext, dataToEncryptHash, accessControlConditions } = await runExample(data.Data);
+   const { ciphertext, dataToEncryptHash, accessControlConditions } = await runExample(data);
    console.log(`ℹ️  ciphertext: ${ciphertext}`);
    console.log(`ℹ️  dataToEncryptHash: ${dataToEncryptHash}`);
    console.log(`ℹ️  accessControlConditions: ${accessControlConditions}`);

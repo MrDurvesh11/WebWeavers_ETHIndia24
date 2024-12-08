@@ -3,7 +3,7 @@
 // import fs from 'fs';
 // import path from 'path';
 // import FormData from 'form-data';
-
+import { encryptString, decryptToString } from "@lit-protocol/encryption";
 import { LIT_ABILITY } from "@lit-protocol/constants";
 // import * as LitJsSdk from "@lit-protocol/lit-node-client";
 // import { getEnv, getLitNodeClient } from "./utils.js";
@@ -57,7 +57,7 @@ async function decryptData(ciphertext, dataToEncryptHash, accessControlCondition
             });
         },
     });
-    const decryptedString = await litNodeClient.decrypt(
+    const decryptedString = await decryptToString(
         {
             accessControlConditions,
             chain: "ethereum",
@@ -67,12 +67,12 @@ async function decryptData(ciphertext, dataToEncryptHash, accessControlCondition
         },
         litNodeClient,
     );
-
+    console.log(`ℹ️  decryptedString: ${decryptedString}`);
 
     const textDecoder = new TextDecoder();
     const decryptedString2 = textDecoder.decode(new Uint8Array(decryptedString.decryptedData));
-    console.log(`ℹ️  decryptedString: ${decryptedString2}`);
-    return decryptedString2;
+    // console.log(`ℹ️  decryptedString: ${decryptedString2}`);
+    return decryptedString;
 }
 
 export async function POST(request) {
