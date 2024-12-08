@@ -57,6 +57,13 @@ The traditional IPO allocation systems are:
 
 ---
 
+## 🏗 **Project Architecture**  
+
+Below is the architecture of the EquiChain project that demonstrates the interaction between different components:
+
+![EquiChain Architecture](./archt.jpg)
+
+
 ## 🛠 **Tech Stack**  
 | Technology          | Role in Project                | Documentation Link                                    |  
 |---------------------|--------------------------------|-----------------------------------------------------|  
