@@ -22,7 +22,7 @@ export default function AuroraBackgroundDemo() {
         </div>
 
         <div className="font-light text-sm sm:text-base md:text-2xl lg:text-4xl text-gray-300 py-4 text-center">
-          Experience transparent, fair, and decentralized IPO allocation with EquiChain's Web3-powered platform.
+          Experience transparent, fair, and decentralized IPO allocation with EquiChain Web3-powered platform.
         </div>
         <button className="bg-blue-600 dark:bg-gray-800 rounded-full w-fit text-white px-6 py-3 mx-auto mt-6 transition hover:bg-blue-700 dark:hover:bg-gray-600">
           Get Started
