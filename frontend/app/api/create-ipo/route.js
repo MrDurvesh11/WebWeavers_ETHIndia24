@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import FormData from 'form-data';
 
-const API_BASE_URL = process.env.BASE_URL;
+const API_BASE_URL = "http://localhost:8000";
 
 export async function POST(request) {
     const data = await request.json();
@@ -13,17 +13,42 @@ export async function POST(request) {
     const filePath = path.resolve('./IPODetails.json');
     
     // Write the received IPO details to the text file
-    let fileData = JSON.stringify(data);
-    // heramb
-    fs.writeFileSync(filePath, fileData);
+    const fileData = JSON.stringify(data);
 
-    const bucketName = data.ipoName.replace(/ /g, '-').toLowerCase();
+    // let encryptResponse;
+    try {
+        // Send the file to the server using Axios
+        const encryptResponse = await axios.post("http://localhost:3000/api/encrypt-string", fileData );
+        const data2 = encryptResponse.data;
+        console.log('Upload successful:', data2);
+        fs.writeFileSync(filePath, JSON.stringify(data2));
+        console.log("Encrypted The Data :) ");
 
-    const bucket = await createBucket(bucketName);
-    // Now upload the file to the bucket
-    const file = await uploadFile(bucketName, filePath);
+        const bucketName = data.ipoName.replace(/ /g, '-').toLowerCase();
+    
+        const bucket = await createBucket(bucketName);
+        // Now upload the file to the bucket
+        const file = await uploadFile(bucketName, filePath);
+    
+        return NextResponse.json({ message: 'IPO created successfully' , file, bucket });
+    } catch (error) {
+        console.error('Error in API:', error.response ? error.response.data : error.message);
+        return NextResponse.json({ message: 'ERROR' });
 
-    return NextResponse.json({ message: 'IPO created successfully' , file, bucket });
+    }
+    
+    // const encryptResponse = await axis.post("/api/encrypt-string", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ fileData: JSON.stringify(data) }),
+    // });
+
+    // if (!encryptResponse.ok) {
+    //     throw new Error('Failed to encrypt the data');
+    // }
+
+    // const encryptedData = await encryptResponse.json();
+   
 }
 
 async function uploadFile(bucketName, filePath) {

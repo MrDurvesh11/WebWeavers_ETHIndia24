@@ -4,7 +4,7 @@ import SectionTitle from "@/components/sectionTitle";
 import { TabsSection } from "@/components/TabsSection";
 // import Hero from "@/components/hero";
 // import HeroSection from "@/components/HeroSection";
-import { AuroraBackgroundDemo } from "@/components/HeroSection";
+import AuroraBackgroundDemo from "@/components/HeroSection"; // Ensure this import is correct
 import { NavbarDemo } from "@/components/Navbar";
 import { FeaturesSectionDemo } from "@/components/Features";
 import { benefitOne } from "@/components/data";
@@ -21,18 +21,18 @@ export default function Home() {
       <NavbarDemo />
       {/* <AcertinityNavbar/> */}
       {/* <NavbarDemo /> */}
-      <AuroraBackgroundDemo />
+      <AuroraBackgroundDemo /> {/* Ensure this is correctly imported */}
 
       {/* <Hero/> */}
 
       {/* <Benefits data={benefitOne} />
-       */}
+       */} 
       <FeaturesSectionDemo />
-      <SectionTitle title=" How to use Study Bridge" />
+      <SectionTitle title=" How to use EquiChain" />
       <Video />
 
       <SectionTitle
-        pretitle="Why should you use Study Bridge"
+        pretitle="Why should you use EquiChain"
         title="Our Features"
       ></SectionTitle>
       <TabsSection />

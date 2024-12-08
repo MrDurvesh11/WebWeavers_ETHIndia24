@@ -8,9 +8,8 @@ import {
   Menu,
   ProductItem,
   HoveredLink,
-} from "@/components/ui/navbar-menu"; // assuming this is your components path
+} from "@/components/ui/navbar-menu"; // Assuming this is your components path
 import { FaBars } from "react-icons/fa"; // FontAwesome icons for the hamburger
-import TranslateComponent from "./TranslateComponent";
 
 const transition = {
   type: "spring",
@@ -39,17 +38,16 @@ function Navbar() {
       <div className="flex items-center space-x-4">
         <Image
           src="/logo.png" // Replace with your logo path
-          alt="App Logo"
-          width={50} // Adjusted size for mobile
+          alt="EquiChain Logo"
+          width={50}
           height={50}
-          className="h-12 w-12 lg:h-20 lg:w-20" // Adjust size on larger screens
+          className="h-12 w-12 lg:h-20 lg:w-20"
         />
         <span className="font-bold text-lg lg:text-xl text-black dark:text-white">
-          Study Bridge
-        </span>{" "}
-        {/* Adjusted font size for mobile */}
+          EquiChain
+        </span>
       </div>
-     
+      
       {/* Right: Hamburger Menu for Mobile */}
       <div className="lg:hidden">
         <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -64,28 +62,28 @@ function Navbar() {
           <MenuItem setActive={setActive} active={active} item="Services">
             <div className="text-sm grid grid-cols-2 gap-10 p-4 text-neutral-700 dark:text-neutral-300">
               <ProductItem
-                title="Study Guide Chatbot"
-                href="/student"
-                src="/chatbot.png"
-                description="helps your way of learning with doubt solving ."
+                title="Fair IPO Allocation"
+                href="/services"
+                src="/randomness.png"
+                description="Ensure transparent and equitable IPO allocation using Web3."
               />
               <ProductItem
-                title="Mentor connect"
-                href="/student"
-                src="/mentor.jpeg"
-                description="Connect with the right trainers."
+                title="Decentralized Bidding"
+                href="/services"
+                src="/bidding.png"
+                description="Empower participants with decentralized bidding mechanisms."
               />
               <ProductItem
-                title="Resources"
-                href="/student"
-                src="/resources.jpeg"
-                description="Get the right resources for your career."
+                title="Allocation Transparency"
+                href="/services"
+                src="/transparency.png"
+                description="Track and verify allocation decisions with blockchain transparency."
               />
               <ProductItem
-                title="Roadmap generator"
-                href="/student"
-                src="/roadmap.png"
-                description=" Create your own roadmap for your career."
+                title="Community Engagement"
+                href="/services"
+                src="/community.png"
+                description="Build investor confidence through open communication channels."
               />
             </div>
           </MenuItem>
@@ -110,36 +108,34 @@ function Navbar() {
             <MenuItem setActive={setActive} active={active} item="Services">
               <div className="text-sm grid grid-cols-1 gap-6 text-neutral-700 dark:text-neutral-300">
                 <ProductItem
-                  title="Study Guide Chatbot"
-                  href="/student"
-                  src="/chatbot.png"
-                  description="helps your way of learning with doubt solving ."
+                  title="Fair IPO Allocation"
+                  href="/services"
+                  src="/randomness.png"
+                  description="Ensure transparent and equitable IPO allocation using Web3."
                 />
                 <ProductItem
-                  title="Mentor connect"
-                  href="/student"
-                  src="/mentor.jpeg"
-                  description="Connect with the right trainers."
+                  title="Decentralized Bidding"
+                  href="/services"
+                  src="/bidding.png"
+                  description="Empower participants with decentralized bidding mechanisms."
                 />
                 <ProductItem
-                  title="Resources"
-                  href="/student"
-                  src="/resources.jpeg"
-                  description="Get the right resources for your career."
+                  title="Allocation Transparency"
+                  href="/services"
+                  src="/transparency.png"
+                  description="Track and verify allocation decisions with blockchain transparency."
                 />
                 <ProductItem
-                  title="Roadmap generator"
-                  href="/student"
-                  src="/roadmap.png"
-                  description=" Create your own roadmap for your career."
+                  title="Community Engagement"
+                  href="/services"
+                  src="/community.png"
+                  description="Build investor confidence through open communication channels."
                 />
               </div>
             </MenuItem>
 
             <HoveredLink href="/about">About</HoveredLink>
           </Menu>
-
-          {/* Mobile: Login Button */}
         </div>
       )}
     </div>
