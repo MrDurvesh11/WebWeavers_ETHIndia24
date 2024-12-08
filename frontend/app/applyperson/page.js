@@ -10,10 +10,9 @@ export default function IPOForm() {
     bidLotSize: "",
   });
   const [walletConnected, setWalletConnected] = useState(false);
-  const [isClient, setIsClient] = useState(false); // Ensure client-only rendering
+  const [isClient, setIsClient] = useState(false); // Ensures client-only rendering
 
   useEffect(() => {
-    // This ensures the component is rendered on the client side only
     setIsClient(true);
   }, []);
 
@@ -23,10 +22,14 @@ export default function IPOForm() {
   };
 
   const connectWallet = async () => {
-    if (typeof window !== "undefined" && window.ethereum) {
+    if (typeof window !== "undefined" && window.okto) {
       try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        // Use ethers to create a provider connected to Okto
+        const provider = new ethers.providers.Web3Provider(window.okto);
+        
+        // Request wallet connection
         const accounts = await provider.send("eth_requestAccounts", []);
+        
         setFormData((prev) => ({ ...prev, walletAddress: accounts[0] }));
         setWalletConnected(true);
       } catch (error) {
@@ -34,17 +37,37 @@ export default function IPOForm() {
         alert("Failed to connect wallet. Please try again.");
       }
     } else {
-      alert("MetaMask is not available. Please install it to connect.");
+      alert("Okto Wallet is not available. Please install it to connect.");
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
-    alert("Application submitted successfully!");
+    console.log("Submitting form data:", formData);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/create-ipo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorResponse = await response.text();
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorResponse}`);
+      }
+
+      const data = await response.json();
+      console.log("Response from backend:", data);
+      alert("Application submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to submit application. Please try again.");
+    }
   };
 
-  // Prevent server-side rendering of UI-dependent logic
   if (!isClient) return null;
 
   return (
@@ -64,7 +87,6 @@ export default function IPOForm() {
         </button>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name Field */}
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               Name
@@ -78,8 +100,6 @@ export default function IPOForm() {
               className="w-full px-4 py-2 rounded-lg border bg-gray-50 dark:bg-gray-700"
             />
           </div>
-
-          {/* Wallet Address Field */}
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               Wallet Address
@@ -88,13 +108,12 @@ export default function IPOForm() {
               type="text"
               name="walletAddress"
               value={formData.walletAddress}
-              readOnly
-              placeholder="Connect wallet to autofill"
-              className="w-full px-4 py-2 rounded-lg border bg-gray-100 dark:bg-gray-700"
+              onChange={handleChange}
+              placeholder="Enter your Wallet Address"
+              className="w-full px-4 py-2 rounded-lg border bg-gray-50 dark:bg-gray-700"
+              disabled={walletConnected} // Prevent manual entry after connecting wallet
             />
           </div>
-
-          {/* PAN Card Number Field */}
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               PAN Card Number
@@ -108,8 +127,6 @@ export default function IPOForm() {
               className="w-full px-4 py-2 rounded-lg border bg-gray-50 dark:bg-gray-700"
             />
           </div>
-
-          {/* Bid Lot Size Field */}
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               Bid Lot Size
@@ -123,8 +140,6 @@ export default function IPOForm() {
               className="w-full px-4 py-2 rounded-lg border bg-gray-50 dark:bg-gray-700"
             />
           </div>
-
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"

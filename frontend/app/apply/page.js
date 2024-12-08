@@ -42,9 +42,14 @@ export default function Home() {
   const connectWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        // Create an instance of Web3Provider using window.ethereum
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+        // Request wallet connection and get the accounts
         const accounts = await provider.send("eth_requestAccounts", []);
         const walletAddress = accounts[0];
+
+        // Set the wallet address and update the state
         setFormData((prev) => ({ ...prev, walletAddress }));
         setWalletConnected(true);
         alert("Wallet connected successfully!");
@@ -53,7 +58,7 @@ export default function Home() {
         alert("Failed to connect wallet. Please try again.");
       }
     } else {
-      alert("MetaMask is not installed. Please install it to connect.");
+      alert("Coinbase Wallet is not installed. Please install it to connect.");
     }
   };
 
@@ -74,7 +79,7 @@ export default function Home() {
               onClick={connectWallet}
               className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 dark:hover:bg-blue-800"
             >
-              {walletConnected ? "Wallet Connected" : "Connect Wallet"}
+              {walletConnected ? "Coinbase Wallet Connected" : "Connect Coinbase Wallet"}
             </button>
           </div>
 
