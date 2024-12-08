@@ -158,7 +158,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ### 🎉 **Contribute and Support**  
 Want to contribute? Reach out via [GitHub Issues](https://github.com/MrDurvesh11/WebWeavers_ETHIndia24/issues).  
-For support, contact: `support@equichain.io`.  
+For support, contact: `durveshchaudhari11@gmail.com`.  
 
 ---
 
