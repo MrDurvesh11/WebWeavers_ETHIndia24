@@ -13,7 +13,8 @@ export async function POST(request) {
     const filePath = path.resolve('./IPODetails.json');
     
     // Write the received IPO details to the text file
-    const fileData = JSON.stringify(data);
+    let fileData = JSON.stringify(data);
+    // heramb
     fs.writeFileSync(filePath, fileData);
 
     const bucketName = data.ipoName.replace(/ /g, '-').toLowerCase();
