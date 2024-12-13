@@ -1,0 +1,21 @@
+[package]
+name = "heramb"
+version = "1.0.0"
+authors = []
+
+[addresses]
+example = "0x3504b59fb5b2f191ac9c5bfdbb51d82809199a15769b0f19127d8cee855a2ea1"
+
+[dev-addresses]
+
+[dependencies.SupraFramework]
+git = "https://github.com/Entropy-Foundation/aptos-core.git"
+rev = "dev"
+subdir = "aptos-move/framework/supra-framework"
+
+[dependencies.SupraVrf]
+git = "https://github.com/Entropy-Foundation/vrf-interface"
+subdir = "supra/testnet"
+rev = "testnet"
+    
+[dev-dependencies]
