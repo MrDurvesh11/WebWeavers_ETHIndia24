@@ -6,6 +6,7 @@ import fs from 'fs';
 function readIPODetailsJson() {
     const filePath = './IPODetails.json'; // Adjust the path if necessary
     try {
+        
         const data = fs.readFileSync(filePath, 'utf8');
         return JSON.parse(data); // Convert JSON string to object
     } catch (err) {
